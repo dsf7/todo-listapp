@@ -11,8 +11,7 @@
   <link rel="stylesheet" href="styles/acesso.css">
 
   <!-- ---------------------- lógica aplicada no login ----------------------- -->
-  <script src="/scripts/utils.js"></script>
-  <script src="/scripts/index.js"></script>
+
 
 </head>
 
@@ -32,20 +31,22 @@
       <label>
         Email:
         <input id="inputEmail" type="text">
+        <small id="mailValidation"></small>
       </label>
       <label>
         Senha:
         <input id="inputPassword" type="password">
       </label>
 
-      <button type="submit">Acessar</button>
+      <button id="acessButton" type="submit">Acessar</button>
 
     </form>
     <div class="ingressar">
       <a href="signup.html">Não possui conta? Crie agora mesmo</a>
     </div>
   </div>
-
+  <script src="/scripts/utils/validacoes.js"></script>
+  <script src="/scripts/index.js"></script>
 </body>
 
 </html>
