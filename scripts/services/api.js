@@ -1,4 +1,4 @@
-const authenticate = async (email, pass) => {
+const authenticate = async (email, pass, response) => {
   const result = {
     email: email,
     password: pass,
@@ -12,9 +12,20 @@ const authenticate = async (email, pass) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
+      if (res.error) {
+        response.innerText = res.error;
+        // alert(res.error);
+        return;
+      }
+      if (res.token) {
+        console.log(res);
+        // document.cookie = `token=Bearer ${res.token}; path=/`;
+        // window.location.href = "/tarefas.html";
+      } else {
+        console.log(res);
+      }
       document.cookie = `token=Bearer ${res.token}; path=/`;
-      window.location.href = "/tarefas.html";
+      // window.location.href = "/tarefas.html";
     })
     .catch((err) => console.log(err));
 };
