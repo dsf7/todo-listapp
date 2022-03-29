@@ -12,9 +12,17 @@ const authenticate = async (email, pass) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      document.cookie = `token=Bearer ${res.token}; path=/`;
-      window.location.href = "/tarefas.html";
+      if (res.error) {
+        alert(res.error);
+        return;
+      }
+      if (res.token) {
+        console.log(res);
+        document.cookie = `token=Bearer ${res.token}; path=/`;
+        window.location.href = "/tarefas.html";
+      } else {
+        console.log(res);
+      }
     })
     .catch((err) => console.log(err));
 };
