@@ -13,8 +13,8 @@ const authenticate = async (email, pass, response) => {
     .then((res) => res.json())
     .then((res) => {
       if (res.error) {
-        alert(res.error);
-        return;
+        // alert(res.error);
+        response.innerText = res.error;
       }
       if (res.token) {
         console.log(res);
