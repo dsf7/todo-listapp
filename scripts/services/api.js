@@ -1,3 +1,6 @@
+const mailValidation = document.getElementById("mailValidation");
+const passValidation = document.getElementById("passValidation");
+
 const authenticate = async (email, pass) => {
   const result = {
     email: email,
@@ -13,7 +16,13 @@ const authenticate = async (email, pass) => {
     .then((res) => res.json())
     .then((res) => {
       if (res.error) {
-        alert(res.error);
+        let responseError = Object.values(res.error).join("");
+        if (responseError.toLowerCase().includes("user")) {
+          mailValidation.innerHTML = responseError;
+        }
+        if (responseError.includes("password")) {
+          passValidation.innerHTML = responseError;
+        }
         return;
       }
       if (res.token) {
