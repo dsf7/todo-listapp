@@ -10,7 +10,7 @@ const login = (e) => {
 
   //   faça as validações e passe os valores corretos nos parametros
   //   email / password
-  authenticate(validatedMail, validatedPsswd, response);
+  authenticate(validatedMail, validatedPsswd);
 };
 
 signInForm.addEventListener("submit", login);
