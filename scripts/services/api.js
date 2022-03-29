@@ -2,6 +2,9 @@ const mailValidation = document.getElementById("mailValidation");
 const passValidation = document.getElementById("passValidation");
 
 const authenticate = async (email, pass) => {
+  mailValidation.innerHTML = "";
+  passValidation.innerHTML = "";
+  
   const result = {
     email: email,
     password: pass,
