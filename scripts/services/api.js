@@ -13,19 +13,16 @@ const authenticate = async (email, pass, response) => {
     .then((res) => res.json())
     .then((res) => {
       if (res.error) {
-        response.innerText = res.error;
-        // alert(res.error);
+        alert(res.error);
         return;
       }
       if (res.token) {
         console.log(res);
-        // document.cookie = `token=Bearer ${res.token}; path=/`;
-        // window.location.href = "/tarefas.html";
+        document.cookie = `token=Bearer ${res.token}; path=/`;
+        window.location.href = "/tarefas.html";
       } else {
         console.log(res);
       }
-      document.cookie = `token=Bearer ${res.token}; path=/`;
-      // window.location.href = "/tarefas.html";
     })
     .catch((err) => console.log(err));
 };
