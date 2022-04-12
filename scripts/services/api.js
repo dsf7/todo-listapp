@@ -9,7 +9,7 @@ const authenticate = async (email, pass) => {
     email: email,
     password: pass,
   };
-  await fetch("http://www.techrizzo.com/auth/authenticate", {
+  await fetch("https://ctd-todo-api.herokuapp.com/v1/users/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,9 +35,9 @@ const authenticate = async (email, pass) => {
         }
         return;
       }
-      if (res.token) {
-        console.log(res);
-        document.cookie = `token=Bearer ${res.token}; path=/`;
+
+      if (res.jwt) {
+        document.cookie = `token=Bearer ${res.jwt}; path=/`;
         window.location.href = "/tarefas.html";
       } else {
         console.log(res);
