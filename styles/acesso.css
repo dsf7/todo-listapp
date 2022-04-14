@@ -1,8 +1,20 @@
 @import url("./common.css");
 
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
+  scroll-behavior: smooth;
+}
+
+
 body {
   display: flex;
 }
+
 
 h1 {
   color: rgb(116, 116, 116);
@@ -76,20 +88,35 @@ button {
   text-align: center;
 }
 .left {
-  width: 50%;
   background-color: white;
   text-align: center;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 .left img {
-  width: 60%;
+  max-width: 400px;
+  max-height: 40vh;
 }
 .right {
-  width: 50%;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
+.row-home {
+  height: 100vh;
+}
+
+@media screen and (max-width: 700px) {
+  .left {
+    height: 25vh;
+  }
+  .left img {
+    max-width: 200px;
+  }
+  .right {
+    height: 75%;
+  }
+} 
