@@ -1,6 +1,10 @@
 const userName = document.querySelector("#userName");
 let tokenJwt = window.localStorage.getItem("jwt");
 
+moment.updateLocale('pt', {
+  /**/
+});
+
 onload = () => {
   //Adicionado o token do usuário na Local Storage
   // console.log(tokenJwt);
@@ -112,10 +116,11 @@ function renderizaTarefasPendentes(tarefa) {
     tarefa.id
   }"></div>
       <div class="descricao">
-          <p class="nome">${tarefa.description}</p>
-          <p class="timestamp"><i class="far fa-calendar-alt"></i> ${
-            tarefa.createdAt
-          }</p>
+      <div>
+          <p class="nome">${tarefa.description}</p></div>
+      <div>    
+          <p class="timestamp"><i class="far fa-calendar-alt"></i> ${"Tarefa criada: " + moment(
+            tarefa.createdAt).format('LLLL')}</p></div>
       </div>
   `;
   liTarefasPendente.id = tarefa.id;
@@ -132,6 +137,8 @@ function renderizaTarefasConcluidas(tarefa) {
       <div class="done"></div>
       <div class="descricao">
       <p class="nome">${tarefa.description}</p>
+      <p class="timestamp"><i class="far fa-calendar-alt"></i> ${"Tarefa concluída: " + moment(
+        tarefa.updatedAt).format('LLLL')}</p>
       <div>
           <button onclick="changeList(${tarefa.id})"><i id="${tarefa.id}" class="fas fa-undo-alt change"></i></button>
           <button onclick="deleteTask(${tarefa.id})"><i id="${tarefa.id}" class="far fa-trash-alt"></i></button>
@@ -190,3 +197,4 @@ function deleteTask(id) {
       console.log("erro " + erro);
     });
 }
+

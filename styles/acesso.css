@@ -110,7 +110,7 @@ button {
   height: 100vh;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .left {
     height: 25vh;
   }
@@ -119,5 +119,8 @@ button {
   }
   .right {
     height: 75%;
+  }
+  .row-home {
+    height: 80vh;
   }
 } 
