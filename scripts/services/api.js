@@ -24,7 +24,7 @@ const authenticate = async (email, pass) => {
       if (res.jwt) {
         window.localStorage.setItem("jwt", res.jwt);
         document.cookie = `token=Bearer ${res.jwt}; path=/`;
-        window.location.href = "/tarefas.html";
+        window.location.href = "tarefas.html";
       } else {
         passValidation.innerHTML =
           "Algo deu errado, verifique seu e-mail/senha.";
