@@ -15,6 +15,9 @@ const authenticate = async (email, pass) => {
     body: JSON.stringify(result),
   })
     .then((res) => {
+      if (!res.ok) {
+        throw Error("Error");
+      }
       return res.json();
     })
     .then((res) => {
