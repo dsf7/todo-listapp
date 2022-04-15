@@ -3,7 +3,7 @@ let tokenJwt = window.localStorage.getItem("jwt");
 
 onload = () => {
   //Adicionado o token do usuário na Local Storage
-  console.log(tokenJwt);
+  // console.log(tokenJwt);
 
   //Trazendo o usuario logado;
   let endPointUsuario = "https://ctd-todo-api.herokuapp.com/v1/users/getMe";
@@ -143,15 +143,11 @@ function renderizaTarefasConcluidas(tarefa) {
 }
 
 function changeList(id, flag) {
-  console.log(id);
-
   let usuarioTarefa = {
     completed: flag ?? false,
   };
 
   let tarefaUsuarioJson = JSON.stringify(usuarioTarefa);
-
-  console.log(tarefaUsuarioJson);
 
   let endPointCadastroTarefas = `https://ctd-todo-api.herokuapp.com/v1/tasks/${id}`;
 
