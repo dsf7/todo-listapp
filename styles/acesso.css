@@ -93,6 +93,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
 }
 .left img {
   max-width: 380px;
