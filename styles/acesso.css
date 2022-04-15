@@ -93,9 +93,10 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
 }
 .left img {
-  max-width: 400px;
+  max-width: 380px;
   max-height: 40vh;
 }
 .right {
@@ -109,7 +110,7 @@ button {
   height: 100vh;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .left {
     height: 25vh;
   }
@@ -118,5 +119,8 @@ button {
   }
   .right {
     height: 75%;
+  }
+  .row-home {
+    height: 80vh;
   }
 } 
