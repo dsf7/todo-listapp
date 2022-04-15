@@ -1,10 +1,6 @@
 const userName = document.querySelector("#userName");
 let tokenJwt = window.localStorage.getItem("jwt");
 
-moment.updateLocale('pt', {
-  /**/
-});
-
 onload = () => {
   //Adicionado o token do usuário na Local Storage
   // console.log(tokenJwt);
@@ -110,17 +106,16 @@ let tarefasPendentesUl = document.querySelector(".tarefas-pendentes");
 function renderizaTarefasPendentes(tarefa) {
   let liTarefasPendente = document.createElement("li");
   liTarefasPendente.classList.add("tarefa");
-
+  let date = new Date(tarefa.createdAt);
   let cardTarefasPendente = `
       <div onclick="changeList(${tarefa.id},${true})" class="not-done" id="${
     tarefa.id
   }"></div>
       <div class="descricao">
-      <div>
-          <p class="nome">${tarefa.description}</p></div>
-      <div>    
-          <p class="timestamp"><i class="far fa-calendar-alt"></i> ${"Tarefa criada: " + moment(
-            tarefa.createdAt).format('LLLL')}</p></div>
+          <p class="nome">${tarefa.description}</p>
+          <p class="timestamp"><i class="far fa-calendar-alt"></i> ${date.toLocaleString(
+            "pt-BR"
+          )}</p>
       </div>
   `;
   liTarefasPendente.id = tarefa.id;
@@ -132,16 +127,21 @@ let tarefasTerminadasUl = document.querySelector(".tarefas-terminadas");
 function renderizaTarefasConcluidas(tarefa) {
   let liTarefasPendente = document.createElement("li");
   liTarefasPendente.classList.add("tarefa");
-
+  let date = new Date(tarefa.createdAt);
   let cardTarefasPendente = `
       <div class="done"></div>
       <div class="descricao">
       <p class="nome">${tarefa.description}</p>
-      <p class="timestamp"><i class="far fa-calendar-alt"></i> ${"Tarefa concluída: " + moment(
-        tarefa.updatedAt).format('LLLL')}</p>
+      <p class="timestamp"><i class="far fa-calendar-alt"></i> Tarefa concluída: ${date.toLocaleString(
+        "pt-BR"
+      )}</p>
       <div>
-          <button onclick="changeList(${tarefa.id})"><i id="${tarefa.id}" class="fas fa-undo-alt change"></i></button>
-          <button onclick="deleteTask(${tarefa.id})"><i id="${tarefa.id}" class="far fa-trash-alt"></i></button>
+          <button onclick="changeList(${tarefa.id})"><i id="${
+    tarefa.id
+  }" class="fas fa-undo-alt change"></i></button>
+          <button onclick="deleteTask(${tarefa.id})"><i id="${
+    tarefa.id
+  }" class="far fa-trash-alt"></i></button>
       </div>
       </div>
   `;
@@ -197,4 +197,3 @@ function deleteTask(id) {
       console.log("erro " + erro);
     });
 }
-
