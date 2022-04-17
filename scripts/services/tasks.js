@@ -1,196 +1,121 @@
-const userName = document.querySelector("#userName");
-let tokenJwt = window.localStorage.getItem("jwt");
-
-onload = () => {
-  //Adicionado o token do usuário na Local Storage
-  console.log(tokenJwt);
-
-  //Trazendo o usuario logado;
-  let endPointUsuario = "https://ctd-todo-api.herokuapp.com/v1/users/getMe";
-
-  let configuracaoRequisicaoUser = {
-    method: "GET",
-
-    headers: {
-      "content-type": "application/json",
-      Authorization: `${tokenJwt}`,
-    },
-  };
-
-  fetch(endPointUsuario, configuracaoRequisicaoUser)
-    .then((resultado) => {
-      return resultado.json();
-    })
-    .then((resultado) => {
-      userName.innerText = `${resultado.firstName} ${resultado.lastName}`;
-    })
-    .catch((erro) => {
-      //console.log("erro"+erro);
-    });
-
-  //Adicionando Tarefas Dinamicas
-  let formulario = document.querySelector("form");
-  formulario.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    let novaTarefaInput = document.querySelector("input[name='novaTarefa']");
-    let novaTarefa = novaTarefaInput.value;
-
-    let usuarioTarefa = {
-      description: novaTarefa,
-      completed: false,
-    };
-
-    let tarefaUsuarioJson = JSON.stringify(usuarioTarefa);
-
-    let endPointCadastroTarefas = "https://ctd-todo-api.herokuapp.com/v1/tasks";
-
-    fetch(endPointCadastroTarefas, {
-      method: "POST",
-      body: tarefaUsuarioJson,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `${tokenJwt}`,
-      },
-    })
-      .then((resultado) => {
-        if (resultado.status !== 201) throw Error("Erro ao cadastrar tarefa");
-        return resultado.json();
-      })
-      .then((resultado) => {
-        location.reload();
-      })
-      .catch((erro) => {
-        console.log("erro " + erro);
-      });
-  });
-
-  //Listando as tarefas do usuário logado
-  let endPointTarefas = "https://ctd-todo-api.herokuapp.com/v1/tasks";
-
-  let configuracaoRequisicao = {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-      Authorization: `${tokenJwt}`,
-    },
-  };
-
-  fetch(endPointTarefas, configuracaoRequisicao)
-    .then((resultado) => {
-      return resultado.json();
-    })
-    .then((resultado) => {
-      manipulandoTarefasUsuario(resultado);
-    })
-    .catch((erro) => {
-      //console.log("erro"+erro);
-    });
-};
-
-function manipulandoTarefasUsuario(listaDeTarefas) {
-  for (let tarefa of listaDeTarefas) {
-    if (tarefa.completed) {
-      //Tarefas Terminadas
-      renderizaTarefasConcluidas(tarefa);
-    } else {
-      //Tarefas pendentes
-      renderizaTarefasPendentes(tarefa);
-    }
+let taskArray;
+let isEdit = false;
+onload = async () => {
+  if (!localStorage.getItem("jwt")) {
+    window.location.href = "index.html";
+  } else {
+    const user = await findUser();
+    userName.innerText = `${user.firstName} ${user.lastName}`;
+    taskArray = await getTasks();
+    tasksHandle(taskArray);
   }
+};
+const userName = document.querySelector("#userName");
+const taskform = document.querySelector("form");
+const taskInput = document.querySelector("#novaTarefa");
+const taskDone = document.querySelector("#done");
+const pendingTasks = document.querySelector("#pending");
+const doneTasks = document.querySelector(".tarefas-terminadas");
+const taskEditor = document.querySelector("#taskEditor");
+const taskVerify = document.querySelector("#taskVerify");
+const modalText = document.querySelector(".modalText");
+const taskElement = {
+  id: "",
+  description: "",
+  completed: "",
+};
+let taskStatus = false;
+taskDone.addEventListener("click", (evt) => {
+  if (taskDone.checked) {
+    taskElement.completed = true;
+    console.log("checked");
+    taskStatus = true;
+  } else {
+    taskStatus = false;
+  }
+});
+taskform.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  if (!isEdit) {
+    if (taskInput.value !== "") {
+      createTask(taskInput.value, taskStatus);
+    } else {
+      taskVerify.innerText =
+        "Adicione algum texto antes de cadastrar uma tarefa.";
+    }
+  } else {
+    updateTasks(taskElement.id, taskElement.completed, taskInput.value);
+    isEdit = false;
+  }
+});
 
-  // console.log(listaDeTarefas);
+taskInput.addEventListener("input", () => {
+  taskVerify.innerText = "";
+});
+
+function tasksHandle(taskList) {
+  taskList.forEach((task) => {
+    if (task.completed) {
+      renderDoneTasks(task);
+    } else {
+      renderPendingTasks(task);
+    }
+  });
 }
 
-let tarefasPendentesUl = document.querySelector(".tarefas-pendentes");
-function renderizaTarefasPendentes(tarefa) {
-  let liTarefasPendente = document.createElement("li");
-  liTarefasPendente.classList.add("tarefa");
-
-  let cardTarefasPendente = `
-      <div onclick="changeList(${tarefa.id},${true})" class="not-done" id="${
-    tarefa.id
-  }"></div>
-      <div class="descricao">
-          <p class="nome">${tarefa.description}</p>
-          <p class="timestamp"><i class="far fa-calendar-alt"></i> ${
-            tarefa.createdAt
-          }</p>
-      </div>
-  `;
-  liTarefasPendente.id = tarefa.id;
-  liTarefasPendente.innerHTML = cardTarefasPendente;
-  tarefasPendentesUl.appendChild(liTarefasPendente);
+function renderPendingTasks(task) {
+  let newLi = document.createElement("li");
+  let date = new Date(task.createdAt);
+  newLi.className = "tarefa";
+  newLi.innerHTML = `<div onclick="updateTasks(${
+    task.id
+  }, ${true})" class="not-done" id="${task.id}"></div>
+  <div class="descricao">
+  <div class="taskActions">
+  <button id="taskEditor" onclick="editTask('${task.id},${task.description},${
+    task.completed
+  }')">
+  <i class="fas fa-pen"></i><button>
+  <button onclick="deleteTask(${task.id})"><i id="${
+    task.id
+  }" class="far fa-trash-alt"></i></button>
+  </div>
+    <p class="nome">${task.description}</p>
+    <p class="timestamp"><i class="far fa-calendar-alt"></i> Criada em: ${date.toLocaleDateString(
+      "pt-br"
+    )}</p>
+  </div>`;
+  pendingTasks.appendChild(newLi);
 }
 
-let tarefasTerminadasUl = document.querySelector(".tarefas-terminadas");
-function renderizaTarefasConcluidas(tarefa) {
-  let liTarefasPendente = document.createElement("li");
-  liTarefasPendente.classList.add("tarefa");
-
-  let cardTarefasPendente = `
-      <div class="done"></div>
-      <div class="descricao">
-      <p class="nome">${tarefa.description}</p>
-      <div>
-          <button onclick="changeList(${tarefa.id})"><i id="${tarefa.id}" class="fas fa-undo-alt change"></i></button>
-          <button onclick="deleteTask(${tarefa.id})"><i id="${tarefa.id}" class="far fa-trash-alt"></i></button>
-      </div>
-      </div>
-  `;
-  liTarefasPendente.innerHTML = cardTarefasPendente;
-  tarefasTerminadasUl.appendChild(liTarefasPendente);
+function renderDoneTasks(task) {
+  const newLiDone = document.createElement("li");
+  newLiDone.className = "tarefa";
+  let date = new Date(task.createdAt);
+  newLiDone.innerHTML = `<div class="done"></div>
+ <div class="descricao">
+ <div>
+ <button onclick="updateTasks(${task.id})"
+ <i" class="fas fa-undo-alt change"> </i> </button>
+ <button onclick="deleteTask(${task.id})"><i id="${
+    task.id
+  }" class="far fa-trash-alt"></i></button>
+ </div>
+ <p class="nome">${task.description}</p>
+ <p class="timestamp"><i class="far fa-calendar-alt"></i> Concluída em: ${date.toLocaleDateString(
+   "pt-br"
+ )}</p>
+ </div>`;
+  doneTasks.appendChild(newLiDone);
 }
 
-function changeList(id, flag) {
-  console.log(id);
-
-  let usuarioTarefa = {
-    completed: flag ?? false,
-  };
-
-  let tarefaUsuarioJson = JSON.stringify(usuarioTarefa);
-
-  console.log(tarefaUsuarioJson);
-
-  let endPointCadastroTarefas = `https://ctd-todo-api.herokuapp.com/v1/tasks/${id}`;
-
-  fetch(endPointCadastroTarefas, {
-    method: "PUT",
-    body: tarefaUsuarioJson,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `${tokenJwt}`,
-    },
-  })
-    .then((resultado) => {
-      return resultado.json();
-    })
-    .then((resultado) => {
-      location.reload();
-    })
-    .catch((erro) => {
-      console.log("erro " + erro);
-    });
-}
-
-function deleteTask(id) {
-  let endPointCadastroTarefas = `https://ctd-todo-api.herokuapp.com/v1/tasks/${id}`;
-
-  fetch(endPointCadastroTarefas, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `${tokenJwt}`,
-    },
-  })
-    .then((resultado) => {
-      return resultado.json();
-    })
-    .then((resultado) => {
-      location.reload();
-    })
-    .catch((erro) => {
-      console.log("erro " + erro);
-    });
+function editTask(taskInfo) {
+  isEdit = true;
+  console.log(taskInfo);
+  let taskArray = taskInfo.split(",");
+  console.log(taskArray);
+  taskElement.id = taskArray[0];
+  taskElement.description = taskArray[1];
+  taskElement.completed = Boolean(taskArray[3]);
+  taskInput.value = taskArray[1];
 }

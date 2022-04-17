@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- ----------------------------- estilos CSS ----------------------------- -->
   <link rel="stylesheet" href="./styles/tarefas.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <!-- ------------------- Biblioteca de icones - Fontawesome -------------------- -->
@@ -37,27 +38,60 @@
     </div>
   </header>
 
+  <div class="body">
+    <div class="content">
+      <form class="nova-tarefa">
+        <div class="not-done "><input type="checkbox" name="done" id="done"></div>
+        <div class="inputDiv">
+          <input id="novaTarefa" type="text" placeholder="Nova tarefa"><br>
+          <small id="taskVerify"></small>
+        </div>
 
-  <form class="nova-tarefa">
-    <div class="not-done "></div>
-    <input id="novaTarea" type="text" placeholder="Nova tarefa" name="novaTarefa">
-    <button type="submit">
-      <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
-    </button>
-  </form>
+        <button type="submit">
+          <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
+        </button>
+      </form>
 
 
-  <ul class="tarefas-pendentes">
-    
-  </ul>
+      <ul class="tarefas-pendentes">
+        <div id="pending">
+          <!-- <div id="skeleton"> -->
 
-  <h2 class="titulo-terminadas">Tarefas terminadas</h2>
-  <ul class="tarefas-terminadas">
+        </div>
+      </ul>
 
-  </ul>
-  <script src="/scripts/index.js"></script>
-  <script src="/scripts/services/logout.js"></script>
-  <script src="scripts/services/tasks.js"></script>
+      <h2 class="titulo-terminadas">Tarefas terminadas</h2>
+      <ul class="tarefas-terminadas">
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- modal -->
+  <div id="modalWindow" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar ação.</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="modalText"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./scripts/services/logout.js"></script>
+  <script src="./scripts/services/tasks.js"></script>
+  <script src="./scripts/services/api.js"></script>
+
 </body>
 
 </html>

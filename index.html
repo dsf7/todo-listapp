@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do App</title>
 
-    <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/acesso.css" />
-    <!-- ---------------------- lógica aplicada no login ----------------------- -->
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do App</title>
 
-  <body>
-    <div class="container-fluid">
+  <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/acesso.css" />
+  <!-- ---------------------- lógica aplicada no login ----------------------- -->
+</head>
+
+<body>
+  <div class="container-fluid">
     <div class="row row-cols-auto row-home">
       <div class="left col-12 col-md-6">
-      <img src="./assets/pessoa-login.png" alt="" />
+        <img src="./assets/pessoa-login.png" alt="" />
       </div>
 
       <div class="right col-12 col-md-6" id="signInForm">
         <form>
           <div class="form-header">
-          <p>To-Do App</p>
-         </div>
+            <p>To-Do App</p>
+          </div>
           <h1>Acessar</h1>
 
           <label>
-          Email:
-          <input name="email" id="inputEmail" type="text" />
+            Email:
+            <input name="email" id="inputEmail" type="text" />
+            <small id="mailVerify"></small>
           </label>
           <label>
-          Senha:
-          <input name="password" id="inputPassword" type="password" />
-          <small id="passValidation"></small>
+            Senha:
+            <input name="password" id="inputPassword" type="password" />
+            <small id="passVerify"></small>
           </label>
 
-          <button id="acessButton">Acessar</button>
+          <button id="buttonAcess">Acessar</button>
         </form>
 
         <div class="ingressar">
-        <a href="signup.html">Não possui conta? Crie agora mesmo</a>
+          <a href="signup.html">Não possui conta? Crie agora mesmo</a>
         </div>
+      </div>
     </div>
-  </div>  
-</div>
-    
-    <script src="scripts/index.js"></script>
-    <script src="scripts/utils/validacoes.js"></script>
-    <script src="scripts/services/api.js"></script>
-    <script src="scripts/services/login.js"></script>
-  </body>
+  </div>
+  <!-- ---------------------- lógica aplicada no login ----------------------- -->
+  <script src="/scripts/utils/validacoes.js"></script>
+  <script src="/scripts/services/login.js"></script>
+  <script src="/scripts/services/api.js"></script>
+  <script src="/scripts/index.js"></script>
+</body>
+
 </html>

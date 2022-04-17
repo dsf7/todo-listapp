@@ -1,16 +1,43 @@
-const signInForm = document.getElementById("signInForm");
-const mail = document.querySelector("#inputEmail");
-const pswd = document.querySelector("#inputPassword");
-const acessBtn = document.querySelector("#acessButton");
-const passVal = document.querySelector("#passValidation");
-const login = (e) => {
-  e.preventDefault();
-  const validatedMail = trimText(mail.value);
-  const validatedPsswd = trimText(pswd.value);
+let mailInput = document.querySelector("#inputEmail");
+let passwdInput = document.querySelector("#inputPassword");
+let acessBtn = document.querySelector("#buttonAcess");
+let mailVerify = document.querySelector("#mailVerify");
+let passVerify = document.querySelector("#passVerify");
+let isMailvalid = false;
+let isPassValid = false;
 
-  //   faça as validações e passe os valores corretos nos parametros
-  //   email / password
-  authenticate(validatedMail, validatedPsswd);
-};
+isValid();
 
-signInForm.addEventListener("submit", login);
+acessBtn.addEventListener("click", (evt) => {
+  evt.preventDefault();
+  if (isValid()) {
+    authenticate(mailInput.value, passwdInput.value);
+  } else {
+  }
+});
+
+mailInput.addEventListener("input", (evt) => {
+  isMailvalid = validMail(mailInput.value);
+  isValid();
+});
+
+passwdInput.addEventListener("keypress", (evt) => {
+  validationSpacePasswd(evt);
+});
+
+passwdInput.addEventListener("input", (evt) => {
+  isPassValid = validInput(passVerify, passwdInput);
+  isValid();
+});
+
+function isValid() {
+  if (isMailvalid && isPassValid) {
+    acessBtn.removeAttribute("disabled");
+    acessBtn.innerText = "Acessar";
+    return true;
+  } else {
+    acessBtn.setAttribute("disabled", true);
+    acessBtn.innerText = "Bloqueado";
+    return false;
+  }
+}

@@ -1,6 +1,5 @@
 @import url("./common.css");
 
-
 * {
   margin: 0;
   padding: 0;
@@ -10,11 +9,9 @@
   scroll-behavior: smooth;
 }
 
-
 body {
   display: flex;
 }
-
 
 h1 {
   color: rgb(116, 116, 116);
@@ -69,6 +66,7 @@ label {
 small {
   display: flex;
   color: red;
+  word-wrap: break-word;
 }
 
 button {
@@ -78,6 +76,10 @@ button {
   margin-top: 2em;
   font-weight: 400;
   font-size: 1em;
+}
+
+button:disabled {
+  background-color: red;
 }
 
 .form-header {
@@ -93,9 +95,10 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 200px;
 }
 .left img {
-  max-width: 400px;
+  max-width: 380px;
   max-height: 40vh;
 }
 .right {
@@ -109,7 +112,7 @@ button {
   height: 100vh;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .left {
     height: 25vh;
   }
@@ -119,4 +122,7 @@ button {
   .right {
     height: 75%;
   }
-} 
+  .row-home {
+    height: 80vh;
+  }
+}
