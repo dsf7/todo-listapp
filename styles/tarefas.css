@@ -370,18 +370,7 @@ input[type="checkbox"]:disabled {
   bottom: 100%;
   left: calc(0.75em - 1px);
   display: block;
-  height: 11.9em;
-  width: 2px;
-  background-color: var(--secondary);
-}
-
-.tarefa:first-child .not-done::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: calc(0.75em - 1px);
-  display: block;
-  height: 11.9em;
+  height: 11.4em;
   width: 2px;
   background-color: var(--secondary);
 }
@@ -417,8 +406,59 @@ input[type="checkbox"]:disabled {
     top: 100%;
     left: calc(0.75em - 1px);
     display: block;
-    height: 15em;
+    height: 12.9em;
     width: 2px;
     background-color: var(--secondary);
   }
   }
+
+  @media screen and (max-width: 505px) {
+  
+    .tarefa:first-child .not-done::before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: calc(0.75em - 1px);
+      display: block;
+      height: 11.9em;
+      width: 2px;
+      background-color: var(--secondary);
+    }
+    
+    .tarefa:not(:last-child) .not-done::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: calc(0.75em - 1px);
+      display: block;
+      height: 13.7em;
+      width: 2px;
+      background-color: var(--secondary);
+    }
+    }  
+
+
+    @media screen and (max-width: 490px) {
+  
+      .tarefa:first-child .not-done::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: calc(0.75em - 1px);
+        display: block;
+        height: 11.9em;
+        width: 2px;
+        background-color: var(--secondary);
+      }
+      
+      .tarefa:not(:last-child) .not-done::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: calc(0.75em - 1px);
+        display: block;
+        height: 13.7em;
+        width: 2px;
+        background-color: var(--secondary);
+      }
+      }      
