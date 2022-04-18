@@ -1,5 +1,6 @@
 let taskArray;
 let isEdit = false;
+
 onload = async () => {
   if (!localStorage.getItem("jwt")) {
     window.location.href = "index.html";
@@ -10,6 +11,7 @@ onload = async () => {
     tasksHandle(taskArray);
   }
 };
+
 const userName = document.querySelector("#userName");
 const taskform = document.querySelector("form");
 const taskInput = document.querySelector("#novaTarefa");
@@ -25,6 +27,7 @@ const taskElement = {
   completed: "",
 };
 let taskStatus = false;
+
 taskDone.addEventListener("click", (evt) => {
   if (taskDone.checked) {
     taskElement.completed = true;
@@ -34,6 +37,7 @@ taskDone.addEventListener("click", (evt) => {
     taskStatus = false;
   }
 });
+
 taskform.addEventListener("submit", (evt) => {
   evt.preventDefault();
   if (!isEdit) {
@@ -72,9 +76,9 @@ function renderPendingTasks(task) {
   }, ${true})" class="not-done" id="${task.id}"></div>
   <div class="descricao row row-cols-auto row-home">
   <div class="taskActions">
-  <button id="taskEditor" onclick="editTask('${task.id},${task.description},${
-    task.completed
-  }')">
+  <button id="taskEditor" onclick="editTask(${task.id}, '${
+    task.description
+  }', ${task.completed})">
   <i class="fas fa-pen"></i><button>
   <button onclick="deleteTask(${task.id})"><i id="${
     task.id
@@ -117,14 +121,12 @@ function renderDoneTasks(task) {
   doneTasks.appendChild(newLiDone);
 }
 
-function editTask(taskInfo) {
+function editTask(id, description, completed) {
   isEdit = true;
-  console.log(taskInfo);
-  let taskArray = taskInfo.split(",");
-  console.log(taskArray);
-  taskElement.id = taskArray[0];
-  taskElement.description = taskArray[1];
-  taskElement.completed = Boolean(taskArray[3]);
-  taskInput.value = taskArray[1];
-}
 
+  taskElement.id = id;
+  taskElement.description = description;
+  taskElement.completed = completed;
+
+  taskInput.value = description;
+}
