@@ -9,7 +9,7 @@ header {
   display: flex;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   box-shadow: 0px 3px 5px lightgrey;
-  padding: 0 3em;
+  padding: 0 10px;
   margin-bottom: 2em;
 }
 
@@ -19,14 +19,20 @@ a {
   padding: 0.7em 1em;
   border-bottom: 0.2em solid white;
   text-decoration: none;
-  color: white;
+  color: rgb(120, 0, 0);
+}
+
+.link-tarefas {
+  color: rgb(120, 0, 0);
+  background-color: rgba(244, 169, 49, 0.481);
 }
 
 .user-info {
+  margin-top: 10px;
   display: flex;
   align-items: center;
   margin-left: auto;
-  color: rgb(223, 223, 223);
+  color: rgb(120, 0, 0);
 }
 
 .user-info p {
@@ -34,13 +40,15 @@ a {
 }
 
 .user-info .user-image {
+  margin-bottom: 10px;
   height: 2em;
   width: 2em;
   min-width: 2em;
   border-radius: 50%;
   background-color: white;
   opacity: 0.4;
-  margin-left: 0.7em;
+  margin-left: 1vw;
+  margin-right: 3vw;
 }
 
 
@@ -56,12 +64,18 @@ a {
 
 /* Nova tarefa ----------------------------------------------------------- */
 
+.content {
+  width: 100%;
+}
+
 .nova-tarefa {
+  width: 85%;
   position: relative;
   display: flex;
   align-items: center;
   background-color: white;
-  margin: 0 10%;
+  margin: 5% 10%;
+  margin-bottom: 0%;
   padding: 1em;
   box-shadow: 2px 2px 10px lightgrey;
   border-radius: 0.2em;
@@ -133,9 +147,9 @@ a {
 .tarefas-pendentes {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 72%;
   list-style: none;
-  margin: 2em 15%;
+  margin: 2em 9%;
 }
 
 .tarefa {
@@ -143,6 +157,17 @@ a {
   align-items: center;
   margin-bottom: 1.5em;
 }
+
+.tarefa-pendente {
+  background-color: rgb(250, 252, 201);
+  padding-top: 10px;
+}
+
+.tarefa-concluida {
+  background-color: rgb(163, 255, 132);
+  padding-top: 10px;
+}
+
 input[type="checkbox"] {
   -webkit-appearance: none;
   /* Remove most all native input styles */
@@ -196,8 +221,9 @@ input[type="checkbox"]:disabled {
   width: 80%;
   margin: 0 auto;
 }
+
 .content h2{
-  color: blueviolet;
+  color: rgb(77, 208, 47);
   margin: 0 auto;
   width: fit-content;
   padding: 1em;
@@ -211,7 +237,7 @@ input[type="checkbox"]:disabled {
   height: 1.5em;
   width: 1.5em;
   min-width: 1.5rem;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   box-shadow: 2px 2px 5px lightgrey;
   border: 2px solid var(--secondary);
   z-index: 2;
@@ -248,20 +274,23 @@ input[type="checkbox"]:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 2vh;
   flex: 1;
   background-color: white;
   padding: 1em 2em;
   box-shadow: 2px 2px 5px lightgrey;
+  width: ;
 }
 
 .tarefa .nome {
   color: rgb(95, 95, 95);
+  grid-auto-flow: row;
 }
 
 .tarefa .timestamp {
   font-size: 0.9em;
   color: rgb(134, 134, 134);
+  grid-auto-flow: row;
 }
 
 /* Tarefas terminadas ----------------------------------------------------------- */
@@ -333,8 +362,11 @@ input[type="checkbox"]:disabled {
     opacity: 0.8;
   }
 }
-@media screen and (max-width: 750px) {
+
+/* @media screen and (max-width: 750px) {
   .tarefas-pendentes {
     margin: 2em 10%;
   }
-}
+  .descricao {  
+  }
+} */

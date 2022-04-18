@@ -71,7 +71,7 @@ small {
 
 button {
   padding: 0.5em 3em;
-  background-color: var(--primary);
+  background-color: var(--secondary);
   color: white;
   margin-top: 2em;
   font-weight: 400;
@@ -79,7 +79,7 @@ button {
 }
 
 button:disabled {
-  background-color: red;
+  background-color: rgb(152, 0, 0);
 }
 
 .form-header {

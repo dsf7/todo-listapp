@@ -70,7 +70,7 @@ function renderPendingTasks(task) {
   newLi.innerHTML = `<div onclick="updateTasks(${
     task.id
   }, ${true})" class="not-done" id="${task.id}"></div>
-  <div class="descricao">
+  <div class="descricao row row-cols-auto row-home">
   <div class="taskActions">
   <button id="taskEditor" onclick="editTask('${task.id},${task.description},${
     task.completed
@@ -80,10 +80,14 @@ function renderPendingTasks(task) {
     task.id
   }" class="far fa-trash-alt"></i></button>
   </div>
+  <div class="tarefa-pendente col-12 col-md-12">
     <p class="nome">${task.description}</p>
+  </div>
+  <div class="div-data col-auto">
     <p class="timestamp"><i class="far fa-calendar-alt"></i> Criada em: ${date.toLocaleDateString(
       "pt-br"
     )}</p>
+  </div>  
   </div>`;
   pendingTasks.appendChild(newLi);
 }
@@ -93,18 +97,22 @@ function renderDoneTasks(task) {
   newLiDone.className = "tarefa";
   let date = new Date(task.createdAt);
   newLiDone.innerHTML = `<div class="done"></div>
- <div class="descricao">
- <div>
+ <div class="descricao row row-cols-auto row-home">
+ <div col>
  <button onclick="updateTasks(${task.id})"
  <i" class="fas fa-undo-alt change"> </i> </button>
  <button onclick="deleteTask(${task.id})"><i id="${
     task.id
   }" class="far fa-trash-alt"></i></button>
  </div>
+ <div class="tarefa-concluida col-12 col-md-12">
  <p class="nome">${task.description}</p>
+ </div>
+ <div class="div-data col-auto">
  <p class="timestamp"><i class="far fa-calendar-alt"></i> Concluída em: ${date.toLocaleDateString(
    "pt-br"
  )}</p>
+ </div>
  </div>`;
   doneTasks.appendChild(newLiDone);
 }
@@ -119,3 +127,4 @@ function editTask(taskInfo) {
   taskElement.completed = Boolean(taskArray[3]);
   taskInput.value = taskArray[1];
 }
+
