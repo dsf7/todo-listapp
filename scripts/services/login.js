@@ -37,7 +37,7 @@ function isValid() {
     return true;
   } else {
     acessBtn.setAttribute("disabled", true);
-    acessBtn.innerText = "Bloqueado";
+    acessBtn.innerText = "Insira seus dados";
     return false;
   }
 }

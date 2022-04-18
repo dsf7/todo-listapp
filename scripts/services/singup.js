@@ -61,7 +61,7 @@ passRepeat.addEventListener("input", (evt) => {
 function isValid() {
   if (isNameValid && isLastNameValid && isMailValid && isPassMatch) {
     submitBtn.removeAttribute("disabled");
-    submitBtn.innerText = "Acessar";
+    submitBtn.innerText = "Cadastrar";
     return true;
   } else {
     submitBtn.setAttribute("disabled", true);
@@ -72,5 +72,5 @@ function isValid() {
 
 function disableBtn() {
   submitBtn.setAttribute("disabled", true);
-  submitBtn.innerText = "Bloqueado";
+  submitBtn.innerText = "Preencha o Formulário";
 }
