@@ -65,7 +65,7 @@ function isValid() {
     return true;
   } else {
     submitBtn.setAttribute("disabled", true);
-    submitBtn.innerText = "Bloqueado";
+    submitBtn.innerText = "Preencha o Formulário";
     return false;
   }
 }
