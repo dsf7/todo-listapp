@@ -339,6 +339,7 @@ input[type="checkbox"]:disabled {
   text-decoration: line-through;
 }
 
+
 #skeleton .descricao {
   background-color: rgb(189, 189, 189);
 }
@@ -351,9 +352,10 @@ input[type="checkbox"]:disabled {
 }
 
 #skeleton {
-  animation: trasparencia 1s infinite;
+  animation: transparencia 1s infinite;
 }
-@keyframes trasparencia {
+
+@keyframes transparencia {
   0% {
     opacity: 0.5;
   }
@@ -453,11 +455,12 @@ input[type="checkbox"]:disabled {
       height: 13.7em;
       width: 2px;
       background-color: var(--secondary);
-    }  
+    }
+  } 
 
-    @media screen and (max-width: 490px) {
+  @media screen and (max-width: 490px) {
   
-      .tarefa:first-child .not-done::before {
+    .tarefa:first-child .not-done::before {
         content: "";
         position: absolute;
         bottom: 100%;
@@ -468,7 +471,7 @@ input[type="checkbox"]:disabled {
         background-color: var(--secondary);
       }
       
-      .tarefa:not(:last-child) .not-done::after {
+    .tarefa:not(:last-child) .not-done::after {
         content: "";
         position: absolute;
         top: 100%;
@@ -478,4 +481,4 @@ input[type="checkbox"]:disabled {
         width: 2px;
         background-color: var(--secondary);
       }
-      }      
+  }

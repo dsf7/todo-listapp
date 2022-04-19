@@ -8,7 +8,7 @@ const authenticate = async (email, password) => {
   usuario.password = password;
   console.log(usuario);
   let endpoint = "https://ctd-todo-api.herokuapp.com/v1/users/login";
-  let requision = {
+  let requisition = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,8 +16,7 @@ const authenticate = async (email, password) => {
     body: JSON.stringify(usuario),
   };
 
-  
-  await fetch(endpoint, requision)
+  await fetch(endpoint, requisition)
     .then((res) => {
       if (res.status === 200 || res.status === 201) {
         return res.json();
@@ -52,14 +51,14 @@ const addUser = async (firstName, lastName, email, password) => {
   newUser.lastName = lastName;
   newUser.email = email;
   newUser.password = password;
-  let requision = {
+  let requisition = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newUser),
   };
-  await fetch(endpoint, requision)
+  await fetch(endpoint, requisition)
     .then((res) => {
       console.log(res);
       if (res.status === 200) {
@@ -69,18 +68,23 @@ const addUser = async (firstName, lastName, email, password) => {
       }
     })
     .then((res) => {
-      console.log(res);
-      localStorage.setItem("jwt", res);
-      location.href = "index.html";
+        spinnerOn();
+        setTimeout(() => {
+        console.log(res);
+        window.localStorage.setItem("jwt", res.jwt);
+        spinnerOff();
+        window.location.href = "tarefas.html";
+      },2000);
     })
     .catch((err) => {
-      sendApiResponse(err);
+      sendApiResponse(err, passVerify);
+      console.log(err);
     });
 };
 
 const findUser = async () => {
   let endpoint = "https://ctd-todo-api.herokuapp.com/v1/users/getMe";
-  let requision = {
+  let requisition = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -88,7 +92,7 @@ const findUser = async () => {
     },
   };
   let user;
-  await fetch(endpoint, requision)
+  await fetch(endpoint, requisition)
     .then((res) => {
       if (res.status === 200) {
         return res.json();
@@ -112,7 +116,7 @@ const createTask = async (description, status) => {
   task.description = description;
   task.completed = status;
   console.log(task);
-  const requision = {
+  const requisition = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -121,7 +125,7 @@ const createTask = async (description, status) => {
     body: JSON.stringify(task),
   };
 
-  await fetch(endpoint, requision)
+  await fetch(endpoint, requisition)
     .then((res) => {
       if (res.status === 201 || res.status === 200) {
         return res.json();
@@ -140,14 +144,14 @@ const createTask = async (description, status) => {
 const getTasks = async () => {
   let taskArray = [];
   const endpoint = "https://ctd-todo-api.herokuapp.com/v1/tasks";
-  const requision = {
+  const requisition = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       authorization: `${tokenJwt}`,
     },
   };
-  await fetch(endpoint, requision)
+  await fetch(endpoint, requisition)
     .then((res) => {
       if (res.status === 200) {
         return res.json();
@@ -168,7 +172,7 @@ const updateTasks = async (id, flag, name) => {
     completed: flag ?? false,
   };
   const endpoint = `https://ctd-todo-api.herokuapp.com/v1/tasks/${id}`;
-  const requision = {
+  const requisition = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -176,7 +180,7 @@ const updateTasks = async (id, flag, name) => {
     },
     body: JSON.stringify(userTask),
   };
-  await fetch(endpoint, requision)
+  await fetch(endpoint, requisition)
     .then((res) => {
       return res.json();
     })
@@ -188,7 +192,7 @@ const updateTasks = async (id, flag, name) => {
 
 const deleteTask = async (id) => {
   const endpoint = `https://ctd-todo-api.herokuapp.com/v1/tasks/${id}`;
-  const requision = {
+  const requisition = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -196,7 +200,7 @@ const deleteTask = async (id) => {
     },
   };
 
-  await fetch(endpoint, requision)
+  await fetch(endpoint, requisition)
     .then((res) => {
       if (res.status === 200) {
         return res.json();

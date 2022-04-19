@@ -15,7 +15,7 @@ let isLastNameValid = false;
 let isMailValid = false;
 let isPassMatch = false;
 
-disableBtn();
+spinnerOff();
 
 form.addEventListener("change", (evt) => {
   isValid(); 
@@ -74,3 +74,8 @@ function disableBtn() {
   submitBtn.setAttribute("disabled", true);
   submitBtn.innerText = "Preencha o Formulário";
 }
+
+
+
+
+function spinnerOn();
