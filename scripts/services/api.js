@@ -32,7 +32,7 @@ const authenticate = async (email, password) => {
       window.localStorage.setItem("jwt", res.jwt);
       spinnerOff();
       window.location.href = "tarefas.html";
-    },2000);
+    },1000);
     })
     .catch((err) => {
       sendApiResponse(err, passVerify);

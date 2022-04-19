@@ -362,6 +362,25 @@ input[type="checkbox"]:disabled {
   }
 }
 
+.fa-pen {
+  background-color: white;
+  border: 0;
+  box-shadow:none;
+}
+
+.fa-trash-alt {
+  background-color: white;
+  border: 0;
+  box-shadow:none;
+}
+
+.fa-undo-alt {
+  background-color: white;
+  border: 0;
+  box-shadow:none;
+}
+
+
 @media screen and (max-width: 786px) {
   
 .tarefa:first-child .not-done::before {
@@ -434,9 +453,7 @@ input[type="checkbox"]:disabled {
       height: 13.7em;
       width: 2px;
       background-color: var(--secondary);
-    }
     }  
-
 
     @media screen and (max-width: 490px) {
   
