@@ -15,8 +15,8 @@ body {
 }
 
 .loader {
-  -webkit-animation: rotator 2s linear infinite;
-          animation: rotator 2s linear infinite;
+  -webkit-animation: rotator 1s linear infinite;
+          animation: rotator 1s linear infinite;
 }
 
 @-webkit-keyframes rotator {
@@ -46,8 +46,8 @@ body {
   stroke-dashoffset: 0;
   -webkit-transform-origin: center;
           transform-origin: center;
-  -webkit-animation: dash 2s ease-in-out infinite, colors 5.6s ease-in-out infinite;
-          animation: dash 2s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+  -webkit-animation: dash 1s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1s ease-in-out infinite, colors 5.6s ease-in-out infinite;
 }
 
 @-webkit-keyframes colors {
