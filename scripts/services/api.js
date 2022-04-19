@@ -15,6 +15,8 @@ const authenticate = async (email, password) => {
     },
     body: JSON.stringify(usuario),
   };
+
+  
   await fetch(endpoint, requision)
     .then((res) => {
       if (res.status === 200 || res.status === 201) {
@@ -24,9 +26,13 @@ const authenticate = async (email, password) => {
       }
     })
     .then((res) => {
+      spinnerOn();
+      setTimeout(() => {
       console.log(res);
       window.localStorage.setItem("jwt", res.jwt);
+      spinnerOff();
       window.location.href = "tarefas.html";
+    },2000);
     })
     .catch((err) => {
       sendApiResponse(err, passVerify);

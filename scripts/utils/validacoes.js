@@ -56,3 +56,4 @@ function equalPasswords(value1, value2) {
 function sendApiResponse(text, smallElement) {
   smallElement.innerText = text;
 }
+
