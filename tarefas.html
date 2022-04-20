@@ -37,23 +37,21 @@
     </div>
   </header>
 
-    <div class="content container-fluid">
-      <form class="nova-tarefa">
-        <div class="not-done"><input type="checkbox" name="done" id="done"></div>
-        <div class="inputDiv">
-          <input id="novaTarefa" type="text" placeholder="Nova tarefa"><br>
-          <small id="taskVerify"></small>
-        </div>
+  <div class="content container-fluid">
+    <form class="nova-tarefa">
+      <div class="not-done"><input type="checkbox" name="done" id="done"></div>
+      <div class="inputDiv">
+        <input id="novaTarefa" type="text" placeholder="Nova tarefa"><br>
+        <small id="taskVerify"></small>
+      </div>
 
-        <button type="submit">
-          <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
-        </button>
-      </form>
-
+      <button type="submit">
+        <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
+      </button>
+    </form>
+    <div id="skeleton">
       <ul class="tarefas-pendentes">
         <div id="pending">
-          <!-- <div id="skeleton"> -->
-
         </div>
       </ul>
 
@@ -62,29 +60,29 @@
 
       </ul>
 
-
-  <!-- modal -->
-  <div id="modalWindow" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Confirmar ação.</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p class="modalText"></p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    <!-- modal -->
+    <div id="modalWindow" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar ação.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="modalText"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
-  
-</div>
 
 
   <script src="scripts/services/logout.js"></script>

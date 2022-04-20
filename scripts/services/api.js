@@ -16,7 +16,6 @@ const authenticate = async (email, password) => {
     body: JSON.stringify(usuario),
   };
 
-  
   await fetch(endpoint, requisition)
     .then((res) => {
       if (res.status === 200 || res.status === 201) {
@@ -28,11 +27,11 @@ const authenticate = async (email, password) => {
     .then((res) => {
       spinnerOn();
       setTimeout(() => {
-      console.log(res);
-      window.localStorage.setItem("jwt", res.jwt);
-      spinnerOff();
-      window.location.href = "tarefas.html";
-    },1000);
+        console.log(res);
+        window.localStorage.setItem("jwt", res.jwt);
+        spinnerOff();
+        window.location.href = "tarefas.html";
+      }, 1000);
     })
     .catch((err) => {
       sendApiResponse(err, passVerify);
@@ -137,7 +136,7 @@ const createTask = async (description, status) => {
     });
 };
 
-const getTasks = async () => {
+const getTasks = async (loadingElement) => {
   let taskArray = [];
   const endpoint = "https://ctd-todo-api.herokuapp.com/v1/tasks";
   const requisition = {
@@ -156,7 +155,11 @@ const getTasks = async () => {
       }
     })
     .then((res) => {
+      setTimeout( () => {
+        loadingElement.removeAttribute("id");
+      }, 1500)
       taskArray = res;
+      
     })
     .catch((err) => {});
   return taskArray;

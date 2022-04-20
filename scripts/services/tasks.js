@@ -1,13 +1,13 @@
 let taskArray;
 let isEdit = false;
-
+let loadingSkeleton = document.querySelector("#skeleton");
 onload = async () => {
   if (!localStorage.getItem("jwt")) {
     window.location.href = "index.html";
   } else {
     const user = await findUser();
     userName.innerText = `${user.firstName} ${user.lastName}`;
-    taskArray = await getTasks();
+    taskArray = await getTasks(loadingSkeleton);
     tasksHandle(taskArray);
   }
 };
