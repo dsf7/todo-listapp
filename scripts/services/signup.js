@@ -45,6 +45,9 @@ submitBtn.addEventListener("click", (evt) => {
       mailInput.value,
       passwdInput.value
     );
+    spinnerOn();
+    alert("Usuário cadastrado. Faça o seu login.");
+    window.location.href = "index.html";
   }
 });
 
